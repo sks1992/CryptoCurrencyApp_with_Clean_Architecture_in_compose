@@ -2,6 +2,7 @@ package sk.sandeep.cryptocurrencyappcompose.data.remote.dto
 
 
 import com.google.gson.annotations.SerializedName
+import sk.sandeep.cryptocurrencyappcompose.domain.model.CoinDetail
 
 data class CoinDetailDto(
     @SerializedName("contract")
@@ -59,3 +60,16 @@ data class CoinDetailDto(
     @SerializedName("whitepaper")
     val whitepaper: Whitepaper
 )
+
+fun CoinDetailDto.toCoinDetail(): CoinDetail {
+    return CoinDetail(
+        coinId = id,
+        name = name,
+        description = description,
+        symbol = symbol,
+        rank = rank,
+        isActive = isActive,
+        tags = tags.map { it.name },
+        team = team
+    )
+}
