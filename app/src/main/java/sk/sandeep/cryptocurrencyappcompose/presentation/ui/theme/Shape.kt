@@ -1,4 +1,4 @@
-package sk.sandeep.cryptocurrencyappcompose.ui.theme
+package sk.sandeep.cryptocurrencyappcompose.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
