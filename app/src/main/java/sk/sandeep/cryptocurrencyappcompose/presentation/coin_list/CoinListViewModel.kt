@@ -3,7 +3,9 @@ package sk.sandeep.cryptocurrencyappcompose.presentation.coin_list
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import sk.sandeep.cryptocurrencyappcompose.common.Resource
 import sk.sandeep.cryptocurrencyappcompose.domain.use_case.get_coins.GetCoinsUseCase
@@ -15,6 +17,10 @@ class CoinListViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = mutableStateOf(CoinListState())
     val state: State<CoinListState> = _state
+
+    init {
+        getCoins()
+    }
 
     private fun getCoins() {
         getCoinsUseCase().onEach { result ->
@@ -33,7 +39,6 @@ class CoinListViewModel @Inject constructor(
                     )
                 }
             }
-
-        }
+        }.launchIn(viewModelScope)
     }
 }
